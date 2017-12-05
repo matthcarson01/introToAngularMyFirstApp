@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
  <head>
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
    <title></title>
  </head>
- <body>
+ <body ng-controller="myCtrl">
+  <nav>
+    <input type="Search By Title..." ng-model="input.title" />
+  </nav>
+  <button ng-click="makeNewPost = !makeNewPost">Make new post</button>
+  <div ng-show="makeNewPost">
+    <input  ng-model="newPost.title" placeholder="Title">
+    <input  ng-model="newPost.posts" placeholder="Body">
+    <input  ng-model="newPost.entry_date" placeholder="Date">
+    <button ng-click="addPost(newPost)"type="button" name="button">Submit</button>
+  </div>
 
+  <div ng-repeat="post in diary | filter: input">
+    <h3>{{post.title}}</h3>
+    <h6>{{post.entry_date}}</h6>
+    <p>{{post.posts}}</p>
+    <img src="{{post.img_url}}" />
+    <hr/>
+  </div>
 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+  <script src="app.js"></script>
+  <script src="myCtrl.js"></script>
 </body>
 </html>
